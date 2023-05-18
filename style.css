@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--purple: hsl(259, 100%, 65%);
+	--light-red: hsl(0, 100%, 67%);
+	--white: hsl(0, 0%, 100%);
+	--off-white: hsl(0, 0%, 94%);
+	--light-grey: hsl(0, 0%, 86%);
+	--smokey-grey: hsl(0, 1%, 44%);
+	--off-black: hsl(0, 0%, 8%);
+}
+
+/* Font size (inputs): 32px */
+body {
+	background-color: var(--off-white);
+	font-family: 'Poppins', sans-serif;
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container {
+	height: 640px;
+	width: 840px;
+	margin: 0 auto;
+	background-color: var(--white);
+	border-radius: 24px 24px 196px;
+	padding: 58px;
+}
+.input-container {
+	display: flex;
+	gap: 35px;
+	/* margin-bottom: 48px; */
+}
+label > * {
+	display: block;
+}
+
+label span {
+	text-transform: uppercase;
+	font-weight: 700;
+	color: var(--smokey-grey);
+	margin-bottom: 0.5rem;
+}
+
+label input {
+	width: 160px;
+	padding: 20px;
+	font-size: 32px;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 800;
+	color: var(--off-black);
+	border-radius: 10px;
+	border: 1px solid var(--light-grey);
+	outline: none;
+}
+label input::placeholder {
+	color: var(--smokey-grey);
+}
+
+label input:focus {
+	border-color: var(--purple);
+}
+label .error {
+	color: var(--light-red);
+	font-style: italic;
+}
+
+.input-container.error label span {
+	color: var(--light-red);
+}
+.input-container.error label input {
+	border: 1px solid var(--light-red);
+}
+.btn-container {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+.btn-container hr {
+	width: 90%;
+	border: none;
+	border-bottom: 2px solid var(--off-white);
+}
+
+.btn-container button {
+	border-radius: 50%;
+	border: none;
+	background-color: var(--purple);
+	color: var(--off-white);
+	width: 80px;
+	height: 80px;
+	transition: background-color 0.3s ease-in;
+}
+
+.btn-container button:hover {
+	background-color: var(--off-black);
+}
+
+.result-container div {
+	font-size: 6.5rem;
+	font-weight: 900;
+	font-style: italic;
+	line-height: 1;
+}
+
+.result-container div span {
+	color: var(--purple);
+}
