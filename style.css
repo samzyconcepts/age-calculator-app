@@ -49,6 +49,7 @@ label span {
 	font-weight: 700;
 	color: var(--smokey-grey);
 	margin-bottom: 0.5rem;
+	letter-spacing: 3px;
 }
 
 label input {
@@ -116,4 +117,54 @@ label .error {
 
 .result-container div span {
 	color: var(--purple);
+}
+
+@media (max-width: 500px) {
+	.container {
+		width: 90%;
+		height: 31.25rem;
+		border-radius: 24px 24px 108px;
+		padding: 32px 24px;
+	}
+	.input-container {
+		gap: 16px;
+	}
+
+	label span {
+		font-size: 0.75rem;
+	}
+	label .error {
+		margin-top: 0.5rem;
+		font-size: 0.65rem;
+	}
+	label input {
+		width: 100%;
+		padding: 12px 10px;
+		font-size: 16px;
+	}
+	.btn-container {
+		margin-top: 4rem;
+	}
+	.btn-container hr {
+		width: 100%;
+	}
+
+	.btn-container button {
+		position: absolute;
+		width: 64px;
+		height: 64px;
+	}
+        .result-container{
+                margin-top: 4rem;
+        }
+	.result-container div {
+		font-size: 3.5rem;
+                line-height: 1.25;
+	}
+}
+
+@media(max-width: 375px){
+        .result-container div {
+		font-size: 3.2rem;
+	}
 }
