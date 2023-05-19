@@ -34,6 +34,7 @@ Users should be able to:
 ### Screenshot
 
 ![Solution screenshot](./assets/solution-screenshot.png)
+![Solution with value screenshot](./assets/solution-value-screenshot.png)
 
 ### Links
 
