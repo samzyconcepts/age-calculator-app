@@ -22,17 +22,17 @@ const calculateBtn = document.querySelector('button'),
 calculateBtn.addEventListener('click', () => {
 	const dayInput = document.querySelector('#day').value,
 		monthInput = document.querySelector('#month').value,
-		yearInput = document.querySelector('#year').value
+		yearInput = document.querySelector('#year').value,
+		dayOutput = document.querySelector('.result-container .day-value'),
+		monthOutput = document.querySelector('.result-container .month-value'),
+		yearOutput = document.querySelector('.result-container .year-value')
 
-	// Condition for an empty field
 	if (dayInput === '' || monthInput === '' || yearInput === '') {
 		labels = document.getElementsByTagName('label')
 		inputContainer.classList.add('error')
 
 		Array.from(labels).forEach((label) => {
-			const errorMsg = document.createElement('p')
-			errorMsg.classList.add('error')
-			errorMsg.textContent = 'This field is required'
+			const errorMsg = createText('This field is required')
 			label.appendChild(errorMsg)
 
 			// remove the error after 3seconds
@@ -43,31 +43,11 @@ calculateBtn.addEventListener('click', () => {
 		})
 	}
 
-	if (dayInput > 31) {
-		labels = document.getElementsByTagName('label')
-
-		inputContainer.classList.add('error')
-
-		const errorMsg = document.createElement('p')
-		errorMsg.classList.add('error')
-		errorMsg.textContent = 'Must be a valid day'
-
-		labels[0].appendChild(errorMsg)
-
-		setTimeout(() => {
-			inputContainer.classList.remove('error')
-			labels[0].removeChild(errorMsg)
-		}, 3000)
-	}
-
 	if (monthInput > 12) {
 		labels = document.getElementsByTagName('label')
 
 		inputContainer.classList.add('error')
-
-		const errorMsg = document.createElement('p')
-		errorMsg.classList.add('error')
-		errorMsg.textContent = 'Must be a valid month'
+		const errorMsg = createText('Must be a valid month')
 
 		labels[1].appendChild(errorMsg)
 
@@ -87,9 +67,7 @@ calculateBtn.addEventListener('click', () => {
 
 		inputContainer.classList.add('error')
 
-		const errorMsg = document.createElement('p')
-		errorMsg.classList.add('error')
-		errorMsg.textContent = 'Must be in the past'
+		const errorMsg = createText('Must be in the past')
 
 		labels[2].appendChild(errorMsg)
 		setTimeout(() => {
@@ -98,18 +76,53 @@ calculateBtn.addEventListener('click', () => {
 		}, 3000)
 	}
 
-	const ageDay = currentDay - dayInput,
+	let ageDay = currentDay - dayInput,
 		ageMonth = currentMonth - monthInput,
 		ageYear = currentYear - yearInput
 
-	if (ageDay < 0) {
-		ageMonth--
+	const lastDayOfMonth = new Date(currentYear, currentMonth - 1, 0).getDate()
 
-                
+	if (dayInput > 31 || dayInput > lastDayOfMonth) {
+		labels = document.getElementsByTagName('label')
+
+		inputContainer.classList.add('error')
+
+		const errorMsg = createText('Must be a valid day')
+
+		labels[0].appendChild(errorMsg)
+
+		setTimeout(() => {
+			inputContainer.classList.remove('error')
+			labels[0].removeChild(errorMsg)
+		}, 3000)
 	}
 
-	document.querySelector('.result-container .day-value').innerHTML = ageDay
-	document.querySelector('.result-container .month-value').innerHTML =
-		ageMonth
-	document.querySelector('.result-container .year-value').innerHTML = ageYear
+	if (ageDay < 0) {
+		ageMonth--
+		ageDay += lastDayOfMonth
+	}
+
+	if (ageMonth < 0 || (ageMonth === 0 && ageDay < 0)) {
+		ageYear--
+		ageMonth += 12
+	}
+
+	if (
+		(dayInput !== '' && dayInput < 31) &&
+		(monthInput !== '' && monthInput <= 12) &&
+		(yearInput !== '' && yearInput < currentDate)
+	) {
+		dayOutput.innerHTML = ageDay
+		monthOutput.innerHTML = ageMonth
+		yearOutput.innerHTML = ageYear
+	} 
 })
+
+// function to create a the error message in a paragraph
+function createText(text) {
+	const errorMsg = document.createElement('p')
+	errorMsg.classList.add('error')
+	errorMsg.textContent = `${text}`
+
+	return errorMsg
+}
